@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-",
+	"name": "obsidian-live-preview-options",
 	"version": "0.1.0",
-	"description": "An Obsidian.md plugin to ",
+	"description": "Control Obsidian's Live Preview.",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
@@ -19,5 +19,8 @@
 		"obsidian": "latest",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"monkey-around": "^2.3.0"
 	}
 }

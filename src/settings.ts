@@ -1,18 +1,22 @@
 import { PluginSettingTab, Setting } from 'obsidian';
-import MyPlugin from 'main';
+import LivePreviewOptionsPlugin from 'main';
 
 
-export interface MyPluginSettings {
+export interface LivePreviewOptions {
+	inlineMath: boolean;
+	displayMath: boolean;
 }
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
+export const DEFAULT_SETTINGS: LivePreviewOptions = {
+	inlineMath: true,
+	displayMath: true,
 };
 
 // Inspired by https://stackoverflow.com/a/50851710/13613783
 export type KeysOfType<Obj, Type> = NonNullable<{ [k in keyof Obj]: Obj[k] extends Type ? k : never }[keyof Obj]>;
 
-export class SampleSettingTab extends PluginSettingTab {
-	constructor(public plugin: MyPlugin) {
+export class LivePreviewOptionsSettingTab extends PluginSettingTab {
+	constructor(public plugin: LivePreviewOptionsPlugin) {
 		super(plugin.app, plugin);
 	}
 
@@ -20,7 +24,7 @@ export class SampleSettingTab extends PluginSettingTab {
 	    return new Setting(this.containerEl).setName(heading).setHeading();
     }
 
-	addTextSetting(settingName: KeysOfType<MyPluginSettings, string>) {
+	addTextSetting(settingName: KeysOfType<LivePreviewOptions, string>) {
 		return new Setting(this.containerEl)
 			.addText((text) => {
 				text.setValue(this.plugin.settings[settingName])
@@ -33,7 +37,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			});
 	}
 
-	addNumberSetting(settingName: KeysOfType<MyPluginSettings, number>) {
+	addNumberSetting(settingName: KeysOfType<LivePreviewOptions, number>) {
 		return new Setting(this.containerEl)
 			.addText((text) => {
 				text.setValue('' + this.plugin.settings[settingName])
@@ -47,7 +51,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			});
 	}
 
-	addToggleSetting(settingName: KeysOfType<MyPluginSettings, boolean>, extraOnChange?: (value: boolean) => void) {
+	addToggleSetting(settingName: KeysOfType<LivePreviewOptions, boolean>, extraOnChange?: (value: boolean) => void) {
 		return new Setting(this.containerEl)
 			.addToggle((toggle) => {
 				toggle.setValue(this.plugin.settings[settingName])
@@ -60,7 +64,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			});
 	}
 
-	addDropdowenSetting(settingName: KeysOfType<MyPluginSettings, string>, options: readonly string[], display?: (option: string) => string, extraOnChange?: (value: string) => void) {
+	addDropdowenSetting(settingName: KeysOfType<LivePreviewOptions, string>, options: readonly string[], display?: (option: string) => string, extraOnChange?: (value: string) => void) {
 		return new Setting(this.containerEl)
 			.addDropdown((dropdown) => {
 				const displayNames = new Set<string>();
@@ -81,7 +85,7 @@ export class SampleSettingTab extends PluginSettingTab {
 			});
 	}
 
-	addSliderSetting(settingName: KeysOfType<MyPluginSettings, number>, min: number, max: number, step: number) {
+	addSliderSetting(settingName: KeysOfType<LivePreviewOptions, number>, min: number, max: number, step: number) {
 		return new Setting(this.containerEl)
 			.addSlider((slider) => {
 				slider.setLimits(min, max, step)
@@ -97,5 +101,8 @@ export class SampleSettingTab extends PluginSettingTab {
 	
 	display(): void {
 		this.containerEl.empty();
+
+		this.addToggleSetting('inlineMath').setName('Inline math');
+		this.addToggleSetting('displayMath').setName('Display math');
 	}
 }
