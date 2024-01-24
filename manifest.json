@@ -1,9 +1,9 @@
 {
 	"id": "live-preview-options",
 	"name": "Live Preview Options",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"minAppVersion": "1.3.5",
-	"description": "Control Live Preview.",
+	"description": "Partially turn off Live Preview.",
 	"author": "Ryota Ushio",
 	"authorUrl": "https://github.com/RyotaUshio",
 	"fundingUrl": {

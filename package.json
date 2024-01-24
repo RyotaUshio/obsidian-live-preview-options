@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-live-preview-options",
-	"version": "0.1.1",
-	"description": "Control Obsidian's Live Preview.",
+	"version": "0.1.2",
+	"description": "An Obsidian.md plugin to partially turn off Live Preview.",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
